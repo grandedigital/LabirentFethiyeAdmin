@@ -1,0 +1,46 @@
+{
+  "default-group-title": "Fast Menu",
+  "default-page-title": "Default",
+
+  "settings-menu-title": "Setting",
+  "settings-menu-general-title": "General Settings",
+  "setting-menu-user-title": "User Settings",
+  "settings-menu-user-list": "Users",
+  "settings-menu-role-list": "Roles",
+
+
+  "coming-soon": "Coming Soon",
+  "contact-us": "Contact US",
+  "documentation": "Documentation",
+  "disabled-menu": "Disabled Menu",
+  "error-404": "Error 404",
+  "error-500": "Error 500",
+  "maintenance": "Maintenance",
+  "more-items": "More Items",
+  "pages": "Pages",
+  "sample-page": "Sample Page",
+  "under-construction": "Under Construction",
+
+  
+  "facilities-group-title":"Facility Management",
+  "facilities-villas-list-title":"Villa Management",
+  "facilities-aparts-list-title":"Apart Management",
+  "reservations-group-title":"Reservations Management",
+  "reservations-list-title":"Reservations List",
+  "reservations-add-title":"Reservations Add",
+
+  "category-group-title": "Kategori Yönetimi",
+  "category-list-title": "Kategori Listesi",
+  "payment-types-list-title": "Ödeme Türleri Listesi",
+  "payment-types-group-title": "Kasa Yönetimi",
+  "website-group-pages": "Website Yönetimi",
+  "setting-website-title": "Website Yönetimi",
+  "settings-blog-list": "Bloglar",
+  "static-content-list": "Sabit İçerikler",
+  "sss-list": "Sıkça Sorulan Sorular",
+  "comments-page-title": "Yorumlar",
+  "settings-region-list": "Bölgeler",
+  "settings-activities-list": "Aktiviteler",
+
+  "baris":"barış"
+}
