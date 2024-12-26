@@ -263,7 +263,7 @@ export default function CommentList({ apart = false, villa = false }) {
                                     <Eye />
                                 </IconButton>
                             </Tooltip>
-                            <Tooltip title="Delete">
+                            {/* <Tooltip title="Delete">
                                 <IconButton
                                     color="error"
                                     onClick={(e) => {
@@ -275,7 +275,7 @@ export default function CommentList({ apart = false, villa = false }) {
                                 >
                                     <Trash />
                                 </IconButton>
-                            </Tooltip>
+                            </Tooltip> */}
                         </Stack>
                     );
                 }

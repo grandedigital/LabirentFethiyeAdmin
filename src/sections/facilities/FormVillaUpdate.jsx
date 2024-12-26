@@ -118,7 +118,9 @@ export default function FormVillaUpdate() {
     person: Yup.number().moreThan(0, "Kişi sayısı 0'dan büyük olmalıdır").required('Kişi Sayısı zorunludur'),
     region: Yup.string().max(255).required('Lütfen bölge yazınız..'),
     onlineReservation: Yup.boolean().required('Rezervasyon seçeneği zorunludur'),
-    priceType: Yup.number().moreThan(0, 'Fiyat türü zorunlu').required('Fiyat türü zorunlu')
+    priceType: Yup.number().moreThan(0, 'Fiyat türü zorunlu').required('Fiyat türü zorunlu'),
+    personel: Yup.string().max(255).required('Personel seçimi zorunlu..'),
+    villaNumber: Yup.string().max(255).required('Villa numarası zorunlu..'),
   });
 
   const formik = useFormik({

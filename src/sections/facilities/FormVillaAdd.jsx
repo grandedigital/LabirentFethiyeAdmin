@@ -86,7 +86,9 @@ export default function FormVillaAdd() {
     person: Yup.number().moreThan(0, "Kişi sayısı 0'dan büyük olmalıdır").required('Kişi Sayısı zorunludur'),
     region: Yup.string().max(255).required('Lütfen bölge seçiniz..'),
     onlineReservation: Yup.boolean().required('Rezervasyon seçeneği zorunludur'),
-    priceType: Yup.number().moreThan(0, "Fiyat türü zorunlu").required('Fiyat türü zorunlu')
+    priceType: Yup.number().moreThan(0, "Fiyat türü zorunlu").required('Fiyat türü zorunlu'),
+    personel: Yup.string().max(255).required('Personel seçimi zorunlu..'),
+    villaNumber: Yup.string().max(255).required('Villa numarası zorunlu..'),
   });
 
   const formik = useFormik({
@@ -122,7 +124,7 @@ export default function FormVillaAdd() {
         fd.append('GoogleMap', values.googleMap)
         fd.append('MetaTitle', values.metaTitle)
         fd.append('MetaDescription', values.metaDescription)
-        fd.append('Slug', values.slug)
+        // fd.append('Slug', values.slug)
         fd.append('TownId', values.region)
         fd.append('FeatureTextBlue', values.featureTextBlue)
         fd.append('FeatureTextRed', values.featureTextRed)

@@ -40,7 +40,7 @@ function ReactTable({ data, columns, pagination, setPagination, setSorting, sort
         getCoreRowModel: getCoreRowModel(),
         onPaginationChange: setPagination,
         onSortingChange: setSorting,
-        pageCount: data?.pageInfo?.totalPage,
+        pageCount: data?.pageInfo?.totalPage || 1,
         autoResetPageIndex: false,
         state: {
             sorting,
