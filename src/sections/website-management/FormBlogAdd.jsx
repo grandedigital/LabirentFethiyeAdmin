@@ -55,7 +55,7 @@ export default function FormBlogAdd({ closeModal, setIsAdded }) {
 
     useEffect(() => {
 
-        GetMenuBySlug('blogs').then((res) => {
+        GetMenuBySlug('bloglar').then((res) => {
             setMenuId(res?.data?.id)
             setLoading(false);
         })

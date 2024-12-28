@@ -48,7 +48,7 @@ function ReactTable({ data, columns, modalToggler, pagination, setPagination, se
         getCoreRowModel: getCoreRowModel(),
         onPaginationChange: setPagination,
         onSortingChange: setSorting,
-        pageCount: data?.meta?.pagination?.pageCount || 1,
+        pageCount: data?.pageInfo?.totalPage || 1,
         autoResetPageIndex: false,
         state: {
             sorting,
@@ -209,7 +209,7 @@ export default function BlogPage() {
 
     useEffect(() => {
         setLoading(true)
-        GetWebPages('blogs', pagination.pageIndex, pagination.pageSize).then((res) => { setData(res); setLoading(false); });
+        GetWebPages('bloglar', pagination.pageIndex, pagination.pageSize).then((res) => { setData(res); setLoading(false); });
     }, [pagination.pageIndex, pagination.pageSize, sorting, globalFilter, showAllReservation]);
 
 
@@ -222,7 +222,7 @@ export default function BlogPage() {
             setIsDeleted(false)
             setLoading(true)
             //ReservationServices.Villas(pagination.pageIndex + 1, pagination.pageSize, sorting[0]?.desc, sorting[0]?.id.replace('attributes_', ''), globalFilter).then((res) => { setData(res); setLoading(false); });
-            GetWebPages('blogs', pagination.pageIndex, pagination.pageSize).then((res) => { setData(res); setLoading(false); });
+            GetWebPages('bloglar', pagination.pageIndex, pagination.pageSize).then((res) => { setData(res); setLoading(false); });
         }
     }, [isDeleted])
 

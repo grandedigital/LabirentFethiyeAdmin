@@ -55,7 +55,7 @@ export default function FormStaticContentAdd({ closeModal, setIsAdded }) {
 
     useEffect(() => {
 
-        GetMenuBySlug('static-contents').then((res) => {
+        GetMenuBySlug('sabit-icerikler').then((res) => {
             setMenuId(res?.data?.id)
             setLoading(false);
         })
