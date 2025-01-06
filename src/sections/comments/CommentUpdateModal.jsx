@@ -1,24 +1,15 @@
-import PropTypes from 'prop-types';
-import { useMemo } from 'react';
-
 // material-ui
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Modal from '@mui/material/Modal';
 
 // project imports
 import MainCard from 'components/MainCard';
 import SimpleBar from 'components/third-party/SimpleBar';
-
-
+import FormCommentUpdate from './FormCommentUpdate';
 
 // ==============================|| CUSTOMER ADD / EDIT ||============================== //
 
-export default function CommentViewModal({ open, modalToggler, item }) {
+export default function CommentUpdateModal({ open, modalToggler, setIsAdded, selectId }) {
   const closeModal = () => modalToggler(false);
-
-
-
   return (
     <>
       {open && (
@@ -35,15 +26,7 @@ export default function CommentViewModal({ open, modalToggler, item }) {
             content={false}
           >
             <SimpleBar sx={{ maxHeight: `calc(100vh - 48px)`, '& .simplebar-content': { display: 'flex', flexDirection: 'column' } }}>
-              <div style={{ padding: '10px' }}>
-                Yorum: {item?.commentText && item?.commentText}
-              </div>
-              <div style={{ padding: '10px' }}>
-                Email: {item?.email && item?.email}
-              </div>
-              <div style={{ padding: '10px' }}>
-                Telefon Numarası: {item?.phone && item?.phone}
-              </div>
+              <FormCommentUpdate selectId={selectId} setIsAdded={setIsAdded} closeModal={closeModal} />
             </SimpleBar>
           </MainCard>
         </Modal>

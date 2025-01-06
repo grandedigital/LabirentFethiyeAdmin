@@ -79,7 +79,7 @@ const UpdateReservation = (payload) =>
         `/Reservations/ReservationStatusUpdate`, payload, true, true
     );
 
-const ReservationRemove = (id) => remove('/api/reservations/' + id)
+const ReservationRemove = (id) => get('/Reservations/Delete/' + id, true)
 
 const GetNewReservations = () => {
     return get(`/api/reservations?sort[0]=createdAt:desc&populate[0]=reservation_infos&populate[1]=villa&populate[2]=room&filters[$or][0][reservationStatus][$eq]=100`);

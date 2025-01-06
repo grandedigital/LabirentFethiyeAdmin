@@ -14,25 +14,11 @@ import { GetAllReservationInfos, ReservationInfoRemove } from 'services/reservat
 
 // ==============================|| CUSTOMER - DELETE ||============================== //
 
-export default function ReservationModalDelete({ id, title, open, handleClose, setLoading, setIsDeleted, selectedItem }) {
+export default function ReservationModalDelete({ open, handleClose, setLoading, setIsDeleted, selectedItem }) {
   const deletehandler = async () => {
     setLoading(true);
 
-    // await GetAllReservationItems(id).then((res) => {
-    //   console.log("items => ", res.data);
-    //   res.data.map((item) => {
-    //     ReservationItemRemove(item.id);
-    //   });
-    // });
-
-    // await GetAllReservationInfos(id).then((res) => {
-    //   console.log("infos => ", res.data);
-    //   res.data.map((item) => {
-    //     ReservationInfoRemove(item.id);
-    //   });
-    // });
-
-    await ReservationRemove(id).then((res) => {
+    await ReservationRemove(selectedItem?.id).then((res) => {
       if (!res?.error) {
         openSnackbar({
           open: true,
@@ -60,36 +46,48 @@ export default function ReservationModalDelete({ id, title, open, handleClose, s
       aria-labelledby="column-delete-title"
       aria-describedby="column-delete-description"
     >
-      <DialogContent sx={{ mt: 2, my: 1 }}>
-        <Stack alignItems="center" spacing={3.5}>
-          <Avatar color="error" sx={{ width: 72, height: 72, fontSize: '1.75rem' }}>
-            <Trash variant="Bold" />
-          </Avatar>
-          <Stack spacing={2}>
-            <Typography variant="h4" align="center">
-              Rezervasyonu Silmek istediğinize eminimisiniz?
-            </Typography>
-            <Typography align="center">
-              <Typography variant="subtitle1" component="span">
-                {selectedItem?.villa?.data?.attributes?.name} {""}
+      {
+        open &&
+        <DialogContent sx={{ mt: 2, my: 1 }}>
+          <Stack alignItems="center" spacing={3.5}>
+            <Avatar color="error" sx={{ width: 72, height: 72, fontSize: '1.75rem' }}>
+              <Trash variant="Bold" />
+            </Avatar>
+            <Stack spacing={2}>
+              <Typography variant="h4" align="center">
+                Rezervasyonu Silmek istediğinize eminimisiniz?
               </Typography>
-              tesisine bağlı {""}
-              <Typography variant="subtitle1" component="span">
-                {selectedItem?.reservation_infos?.data[0]?.attributes?.name ? selectedItem?.reservation_infos?.data[0]?.attributes?.name : 'Ev Sahibi'} {selectedItem?.reservation_infos?.data[0]?.attributes?.surname ? selectedItem?.reservation_infos?.data[0]?.attributes?.surname : ''} {""}
+              <Typography align="center">
+                <Typography variant="subtitle1" component="span">
+                  {
+                    selectedItem?.villa?.name ?
+                      selectedItem?.villa?.name :
+                      selectedItem?.room?.name
+                  }
+                  {" "}
+                </Typography>
+                tesisine bağlı {""}
+                <Typography variant="subtitle1" component="span">
+                  {
+                    selectedItem?.length !== 0 &&
+                      selectedItem?.homeOwner === true ? 'Ev Sahibi' : selectedItem?.reservationInfos[0]?.name + ' ' + selectedItem?.reservationInfos[0]?.surname
+                  }
+                  {" "}
+                </Typography>
+                adındaki rezervasyonu silmek istediğinize emin misiniz?
               </Typography>
-              adındaki rezervasyonu silmek istediğinize emin misiniz?
-            </Typography>
+            </Stack>
+            <Stack direction="row" spacing={2} sx={{ width: 1 }}>
+              <Button fullWidth onClick={handleClose} color="secondary" variant="outlined">
+                Cancel
+              </Button>
+              <Button fullWidth color="error" variant="contained" onClick={deletehandler} autoFocus>
+                Delete
+              </Button>
+            </Stack>
           </Stack>
-          <Stack direction="row" spacing={2} sx={{ width: 1 }}>
-            <Button fullWidth onClick={handleClose} color="secondary" variant="outlined">
-              Cancel
-            </Button>
-            <Button fullWidth color="error" variant="contained" onClick={deletehandler} autoFocus>
-              Delete
-            </Button>
-          </Stack>
-        </Stack>
-      </DialogContent>
+        </DialogContent>
+      }
     </Dialog>
   );
 }

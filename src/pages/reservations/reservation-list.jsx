@@ -307,7 +307,7 @@ export default function ReservationList() {
                                         e.stopPropagation();
                                         handleClose();
                                         setReservationDeleteId(Number(row.original.id));
-                                        setSelectedReservationDeleteItem(row.original.attributes);
+                                        setSelectedReservationDeleteItem(row.original);
                                     }}
                                 >
                                     <Trash />
@@ -351,7 +351,7 @@ export default function ReservationList() {
             />
 
             <ReservationModal open={reservationModal} modalToggler={setReservationModal} villaId={params.id} />
-            <ReservationModalDelete selectedItem={selectedReservationDeleteItem} setIsDeleted={setIsDeleted} setLoading={setLoading} id={Number(reservationDeleteId)} title={reservationDeleteId} open={reservationModalDelete} handleClose={handleClose} />
+            <ReservationModalDelete selectedItem={selectedReservationDeleteItem} setIsDeleted={setIsDeleted} setLoading={setLoading} open={reservationModalDelete} handleClose={handleClose} />
         </>
     );
 }

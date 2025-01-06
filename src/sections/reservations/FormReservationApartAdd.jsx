@@ -81,8 +81,10 @@ export default function FormReservationApartAdd({ roomId, closeModal, setIsAdded
     const ReservationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required'),
         surname: Yup.string().required('Surname is required'),
-        idNo: Yup.string().required('Tc Kimlik is required'),
-        email: Yup.string().email('Enter a valid email')
+        idNo: Yup.number()
+            .typeError('Please enter a valid number')
+            .required('Id no required')
+            .integer('Number must be an integer'),
     });
 
     const [openAlert, setOpenAlert] = useState(false);

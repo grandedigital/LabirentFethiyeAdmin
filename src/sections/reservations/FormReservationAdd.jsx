@@ -81,8 +81,10 @@ export default function FormReservationAdd({ villaId, closeModal, setIsAdded }) 
     const ReservationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required'),
         surname: Yup.string().required('Surname is required'),
-        idNo: Yup.string().required('Tc Kimlik is required'),
-        email: Yup.string().required('E-mail zorunlu.').email('Enter a valid email'),
+        idNo: Yup.number()
+            .typeError('Please enter a valid number')
+            .required('Id no required')
+            .integer('Number must be an integer'),
         phone: Yup.string().required('Telefon numarası zorunlu.'),
     });
 

@@ -39,7 +39,10 @@ export default function ReservationCustomerUpdateForm({ closeModal, setIsEdit, v
     const validationSchema = Yup.object({
         name: Yup.string().max(255).required('İsim tarihi zorunludur'),
         surname: Yup.string().max(255).required('Soyisim zorunludur'),
-        idNo: Yup.string().max(15).required('Tc no zorunludur'),
+        idNo: Yup.number()
+            .typeError('Please enter a valid number')
+            .required('Id no required')
+            .integer('Number must be an integer'),
         phone: Yup.string().max(255),
         peopleType: Yup.string().max(255).required('Bu alan zorunludur')
     });

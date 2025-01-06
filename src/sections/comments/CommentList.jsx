@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { useMemo, useState, Fragment, useEffect } from 'react';
+import { useMemo, useState,  useEffect } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Chip, Divider, Stack, Button, Table, TableCell, TableBody, TableHead, TableRow, TableContainer, Typography, Box, FormControlLabel, Switch, Tooltip, IconButton, } from '@mui/material';
+import { Chip, Divider, Stack, Button, Table, TableCell, TableBody, TableHead, TableRow, TableContainer,  Box, Tooltip, IconButton, } from '@mui/material';
 
 // third-party
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
@@ -11,26 +11,19 @@ import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-tabl
 // project-import
 import MainCard from 'components/MainCard';
 import ScrollX from 'components/ScrollX';
-import Avatar from 'components/@extended/Avatar';
 import { DebouncedInput, HeaderSort, TablePagination } from 'components/third-party/react-table';
-import { ImagePath, getImageUrl } from 'utils/getImageUrl';
 
 // assets
-import { Add, Edit, Eye, Trash } from 'iconsax-react';
+import { Add, Edit } from 'iconsax-react';
 
 // custom
-import { ReservationServices } from 'services';
 import Loader from 'components/Loader';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
-import ReservationModal from 'sections/reservations/ReservationModal';
 import ReservationModalDelete from 'sections/reservations/ReservationModalDelete';
-import { Categories, CategoriesList } from 'services/categoryServices';
-import CategoryAddModal from 'sections/category/CategoryAddModal';
-import CategoryUpdateModal from 'sections/category/CategoryUpdateModal';
 import { GetCommentsForApart, GetCommentsForVilla } from 'services/commentServices';
-import CommentViewModal from 'sections/comments/CommentViewModal';
 import CommentAddModal from './CommentAddModal';
+import CommentUpdateModal from './CommentUpdateModal';
 
 const fallbackData = [];
 function ReactTable({ data, columns, modalToggler, pagination, setPagination, setSorting, sorting, globalFilter, setGlobalFilter, showAllReservation, setShowAllReservation }) {
@@ -44,7 +37,7 @@ function ReactTable({ data, columns, modalToggler, pagination, setPagination, se
         getCoreRowModel: getCoreRowModel(),
         onPaginationChange: setPagination,
         onSortingChange: setSorting,
-        pageCount: data?.pageInfo?.totalPage,
+        pageCount: data?.pageInfo?.totalPage || 1,
         autoResetPageIndex: false,
         state: {
             sorting,
@@ -131,8 +124,6 @@ function ReactTable({ data, columns, modalToggler, pagination, setPagination, se
                                     <TableRow
                                         key={row.id}
                                         onClick={() => {
-                                            // console.log("Kayıt Id => ", row.original.id);
-                                            // navigate(`/reservations/show/summary/${row.original.id}`)
                                         }}
                                         style={{ cursor: 'pointer' }}
                                     >
@@ -183,7 +174,8 @@ export default function CommentList({ apart = false, villa = false }) {
     const [reservationModalDelete, setReservationModalDelete] = useState(false);
     const [selectedReservationDeleteItem, setSelectedReservationDeleteItem] = useState([])
 
-    const [selectedItem, setSelectedItem] = useState([])
+    const [selectedItem, setSelectedItem] = useState('')
+    const [selectedId, setSelectedId] = useState('')
     const [categoryUpdateModal, setCategoryUpdateModal] = useState(false)
 
     const [pagination, setPagination] = useState({
@@ -243,44 +235,25 @@ export default function CommentList({ apart = false, villa = false }) {
                 },
                 disableSortBy: true,
                 cell: ({ row }) => {
-                    const collapseIcon =
-                        row.getCanExpand() && row.getIsExpanded() ? (
-                            <Add style={{ color: theme.palette.error.main, transform: 'rotate(45deg)' }} />
-                        ) : (
-                            <Eye />
-                        );
                     return (
                         <Stack direction="row" spacing={0}>
-                            <Tooltip title="View">
+                            <Tooltip title="Edit">
                                 <IconButton
                                     color="primary"
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        setSelectedItem(row.original)
+                                        setSelectedId(row.original.id)
                                         setCategoryUpdateModal(true)
                                     }}
                                 >
-                                    <Eye />
+                                    <Edit />
                                 </IconButton>
                             </Tooltip>
-                            {/* <Tooltip title="Delete">
-                                <IconButton
-                                    color="error"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleClose();
-                                        setReservationDeleteId(Number(row.original.id));
-                                        setSelectedReservationDeleteItem(row.original.attributes);
-                                    }}
-                                >
-                                    <Trash />
-                                </IconButton>
-                            </Tooltip> */}
                         </Stack>
                     );
                 }
             }
-        ], // eslint-disable-next-line
+        ], 
         [theme]
     );
 
@@ -312,7 +285,7 @@ export default function CommentList({ apart = false, villa = false }) {
             />
 
             <CommentAddModal villa={villa} apart={apart} setIsAdded={setIsDeleted} open={reservationModal} modalToggler={setReservationModal} />
-            <CommentViewModal item={selectedItem} open={categoryUpdateModal} modalToggler={setCategoryUpdateModal} />
+            <CommentUpdateModal setIsAdded={setIsDeleted} open={categoryUpdateModal} modalToggler={setCategoryUpdateModal} selectId={selectedId} />
             <ReservationModalDelete selectedItem={selectedReservationDeleteItem} setIsDeleted={setIsDeleted} setLoading={setLoading} id={Number(reservationDeleteId)} title={reservationDeleteId} open={reservationModalDelete} handleClose={handleClose} />
         </>
     );
